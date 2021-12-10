@@ -1,19 +1,23 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deply
+  name: web-deploy
   labels:
     app: web
 spec:
-   replicas:5
-   selector:
-     matchLabels:
-	app:web
-spec:
-  terminationGracePeriodSeconds:1
-  containers:
-    - name: hello-pod
-      image: dileepchi/k8s:ale
-      imgaePullPolicy: Always
-      ports:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec: 
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: hello-pod
+        image: dileepchi/k8s:ale
+        imagePullPolicy: Always
+        ports:
         - containerPort: 8083
